@@ -5,8 +5,11 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install Elasticsearch Curator.
-  pip: name=elasticsearch-curator
+- name: Install Elasticsearch Curator and required dependencies.
+  pip: "name={{ item }}"
+  with_items:
+    - elasticsearch-curator
+    - argparse
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
