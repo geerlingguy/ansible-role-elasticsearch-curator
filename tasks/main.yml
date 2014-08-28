@@ -1,14 +1,20 @@
 ---
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
 - name: Install Elasticsearch Curator.
   pip: name=elasticsearch-curator
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
     name: "{{ item.name }}"
-    minute: "{{ item.minute if item.minute else * }}"
-    hour: "{{ item.hour if item.hour else * }}"
-    day: "{{ item.day if item.day else * }}"
-    weekday: "{{ item.weekday if item.weekday else * }}"
-    month: "{{ item.month if item.month else * }}"
     job: "{{ item.job }}"
+    minute: "{{ item.minute | default('*') }}"
+    hour: "{{ item.hour | default('*') }}"
+    day: "{{ item.day | default('*') }}"
+    weekday: "{{ item.weekday | default('*') }}"
+    month: "{{ item.month | default('*') }}"
   with_items: elasticsearch_curator_cron_jobs
