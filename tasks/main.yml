@@ -1,0 +1,14 @@
+---
+- name: Install Elasticsearch Curator.
+  pip: name=elasticsearch-curator
+
+- name: Configure cron jobs for Elasticsearch Curator.
+  cron:
+    name: "{{ item.name }}"
+    minute: "{{ item.minute if item.minute else * }}"
+    hour: "{{ item.hour if item.hour else * }}"
+    day: "{{ item.day if item.day else * }}"
+    weekday: "{{ item.weekday if item.weekday else * }}"
+    month: "{{ item.month if item.month else * }}"
+    job: "{{ item.job }}"
+  with_items: elasticsearch_curator_cron_jobs
