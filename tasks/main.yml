@@ -15,9 +15,26 @@
   cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"
+    state: "{{ item.state | default('present') }}"
     minute: "{{ item.minute | default('*') }}"
     hour: "{{ item.hour | default('*') }}"
     day: "{{ item.day | default('*') }}"
     weekday: "{{ item.weekday | default('*') }}"
     month: "{{ item.month | default('*') }}"
   with_items: elasticsearch_curator_cron_jobs
+  when: elasticsearch_curator_cron_jobs.0.cron_file is undefined and elasticsearch_curator_cron_jobs.0.user is undefined
+
+  - name: Configure cron jobs for Elasticsearch Curator - into etc_cron_d.
+  cron:
+    name: "{{ item.name }}"
+    job: "{{ item.job }}"
+    user: "{{ item.user | default('root') }}"
+    cron_file: "{{ item.cron_file | default('curator') }}"
+    state: "{{ item.state | default('present') }}"
+    minute: "{{ item.minute | default('*') }}"
+    hour: "{{ item.hour | default('*') }}"
+    day: "{{ item.day | default('*') }}"
+    weekday: "{{ item.weekday | default('*') }}"
+    month: "{{ item.month | default('*') }}"
+  with_items: elasticsearch_curator_cron_jobs
+  when: elasticsearch_curator_cron_jobs.0.cron_file is defined and elasticsearch_curator_cron_jobs.0.user is defined
