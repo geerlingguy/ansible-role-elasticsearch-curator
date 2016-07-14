@@ -6,10 +6,10 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install Elasticsearch Curator dependencies.
-  pip: "name=argparse"
+  pip: name=argparse
 
 - name: Install Elasticsearch Curator.
-  pip: "name=elasticsearch-curator==3.5.1"
+  pip: name=elasticsearch-curator version=3.5.1
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
