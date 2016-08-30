@@ -20,4 +20,4 @@
     day: "{{ item.day | default('*') }}"
     weekday: "{{ item.weekday | default('*') }}"
     month: "{{ item.month | default('*') }}"
-  with_items: elasticsearch_curator_cron_jobs
+  with_items: "{{ elasticsearch_curator_cron_jobs }}"

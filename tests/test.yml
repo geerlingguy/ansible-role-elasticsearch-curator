@@ -2,6 +2,10 @@
 - hosts: all
 
   pre_tasks:
+    - name: Install cron (RedHat).
+      yum: name=vixie-cron state=present
+      when: ansible_os_family == 'RedHat'
+
     - name: Update apt cache.
       apt: update_cache=yes
       when: ansible_distribution == 'Ubuntu'
