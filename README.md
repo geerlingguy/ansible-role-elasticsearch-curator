@@ -27,6 +27,7 @@ Available variables are listed below, along with default values (see `defaults/m
         minute: "30",
         hour: "1"
       }
+    elasticsearch_curator_version: 3.5.1
 
 A list of cron jobs to use curator to prune, optimize, close, and otherwise maintain your Elasticsearch indexes. If you're connecting to an Elasticsearch server on a different host/port than `localhost` and `9200`, you need to add `--host [hostname]` and/or `--port [port]` to the jobs. More documentation is available on the [Elasticsearch Curator wiki](https://github.com/elasticsearch/curator/wiki/Examples). You can add any of `minute`, `hour`, `day`, `weekday`, and `month` to the cron jobs—values that are not explicitly set will default to `*`.
 
