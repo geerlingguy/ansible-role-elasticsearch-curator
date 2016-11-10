@@ -11,6 +11,15 @@
     - elasticsearch-curator
     - argparse
 
+- name: mkdir /etc/curator
+  file: path=/etc/curator state=directory mode=0755 owner=root
+
+- name: template in curator config
+  template: src=curator.yml.j2 dest=/etc/curator/curator.yml mode=0644 owner=root group=root backup=yes
+
+- name: template in curator action file
+  template: src=action.yml.j2 dest=/etc/curator/action.yml mode=0644 owner=root group=root backup=yes
+
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
     name: "{{ item.name }}"

@@ -1,14 +1,74 @@
 ---
+##########
+# curator 3
+#elasticsearch_curator_cron_jobs:
+#  - {
+#    name: "Delete old elasticsearch indices.",
+#    job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
+#    minute: 0,
+#    hour: 1
+#  }
+#  - {
+#    name: "Close old elasticsearch indices.",
+#    job: "/usr/local/bin/curator close indices --older-than 14 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
+#    minute: 30,
+#    hour: 1
+#  }
+##########
+# curator 4
+
 elasticsearch_curator_cron_jobs:
   - {
     name: "Delete old elasticsearch indices.",
-    job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
+    job: "/bin/curator --config /etc/curator/curator.yml /etc/curator/action.yml",
     minute: 0,
     hour: 1
   }
-  - {
-    name: "Close old elasticsearch indices.",
-    job: "/usr/local/bin/curator close indices --older-than 14 --time-unit days --timestring '\\%Y.\\%m.\\%d'",
-    minute: 30,
-    hour: 1
-  }
+
+elasticsearch_curator_actions: |
+ actions:
+  1:
+    action: close
+    description: >-
+      Close indices older than 14 days (based on index name), for logstash-
+      prefixed indices.
+    options:
+      delete_aliases: False
+      timeout_override:
+      continue_if_exception: False
+      disable_action: True
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: logstash-
+      exclude: .kibana
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 14
+      exclude:
+ 2:
+    action: delete_indices
+    description: >-
+      Delete indices older than 30 days (based on index name), for logstash-
+      prefixed indices.
+    options:
+      delete_aliases: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: True
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: logstash-
+      exclude: .kibana
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 30
+      exclude:
+
