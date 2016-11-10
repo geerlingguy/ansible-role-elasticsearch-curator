@@ -1,6 +1,13 @@
 ---
 ##########
 
+elasticsearch_curator_config_client_hosts: "127.0.0.1"
+elasticsearch_curator_config_client_port: "9199"
+
+elasticsearch_curator_config_logging_level: "ERROR"
+elasticsearch_curator_config_logging_logfile: ""
+elasticsearch_curator_config_logging_format: "default"
+
 elasticsearch_curator_cron_jobs:
   - {
     name: "Delete old elasticsearch indices.",
