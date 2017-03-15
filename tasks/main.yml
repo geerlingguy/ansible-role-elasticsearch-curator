@@ -13,11 +13,5 @@
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
-    name: "{{ item.name }}"
-    job: "{{ item.job }}"
-    minute: "{{ item.minute | default('*') }}"
-    hour: "{{ item.hour | default('*') }}"
-    day: "{{ item.day | default('*') }}"
-    weekday: "{{ item.weekday | default('*') }}"
-    month: "{{ item.month | default('*') }}"
+  args: item
   with_items: "{{ elasticsearch_curator_cron_jobs }}"
