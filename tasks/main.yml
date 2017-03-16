@@ -13,5 +13,5 @@
 
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
-  args: item
+  args: "{{ item }}"
   with_items: "{{ elasticsearch_curator_cron_jobs }}"
