@@ -1,6 +1,6 @@
 # Ansible Role: Elasticsearch Curator
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-elasticsearch-curator.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-elasticsearch-curator)
+[![Build Status](https://travis-ci.org/mtnsat/ansible-role-elasticsearch-curator.svg?branch=master)](https://travis-ci.org/mtnsat/ansible-role-elasticsearch-curator)
 
 An Ansible Role that installs [Elasticsearch Curator](https://github.com/elasticsearch/curator) on RedHat/CentOS or Debian/Ubuntu.
 
@@ -38,7 +38,7 @@ A list of cron jobs to use curator to prune, optimize, close, and otherwise main
 
     - hosts: search
       roles:
-        - { role: geerlingguy.elasticsearch-curator }
+        - { role: mtnsat.elasticsearch-curator }
 
 ## License
 
