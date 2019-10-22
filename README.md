@@ -15,18 +15,14 @@ On RedHat/CentOS, make sure you have the EPEL repository configured, so the `pyt
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     elasticsearch_curator_cron_jobs:
-      - {
-        name: "Delete old elasticsearch indices.",
-        job: "/usr/local/bin/curator delete --older-than 30",
-        minute: "0",
+      - name: "Delete old elasticsearch indices."
+        job: "/usr/local/bin/curator delete --older-than 30"
+        minute: "0"
         hour: "1"
-      }
-      - {
-        name: "Close old elasticsearch indices.",
-        job: "/usr/local/bin/curator close --older-than 14",
-        minute: "30",
+      - name: "Close old elasticsearch indices."
+        job: "/usr/local/bin/curator close --older-than 14"
+        minute: "30"
         hour: "1"
-      }
 
 A list of cron jobs to use curator to prune, optimize, close, and otherwise maintain your Elasticsearch indexes. If you're connecting to an Elasticsearch server on a different host/port than `localhost` and `9200`, you need to add `--host [hostname]` and/or `--port [port]` to the jobs. More documentation is available on the [Elasticsearch Curator wiki](https://github.com/elasticsearch/curator/wiki/Examples). You can add any of `minute`, `hour`, `day`, `weekday`, and `month` to the cron jobs—values that are not explicitly set will default to `*`.
 
