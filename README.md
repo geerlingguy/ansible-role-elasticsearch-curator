@@ -30,6 +30,10 @@ The version of `elasticsearch-curator` to install. Available versions are listed
 
 A list of cron jobs to use curator to prune, optimize, close, and otherwise maintain your Elasticsearch indexes. If you're connecting to an Elasticsearch server on a different host/port than `localhost` and `9200`, you need to add `--host [hostname]` and/or `--port [port]` to the jobs. More documentation is available on the [Elasticsearch Curator wiki](https://github.com/elasticsearch/curator/wiki/Examples). You can add any of `minute`, `hour`, `day`, `weekday`, and `month` to the cron jobs—values that are not explicitly set will default to `*`. You can also use `state` to define whether the job should be `present` or `absent`.
 
+    elasticsearch_curator_pip_package: 'python-pip'
+
+System pip package which needs to be installed. For newer OSes or when using Python 3, you may need to override this and change it to `python3-pip`.
+
 ## Dependencies
 
   - geerlingguy.repo-epel (RedHat/CentOS only)

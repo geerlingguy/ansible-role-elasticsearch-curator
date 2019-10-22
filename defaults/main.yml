@@ -1,5 +1,6 @@
 ---
 elasticsearch_curator_version: ''
+
 elasticsearch_curator_cron_jobs:
   - name: "Delete old elasticsearch indices."
     job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'"
@@ -9,3 +10,5 @@ elasticsearch_curator_cron_jobs:
     job: "/usr/local/bin/curator close indices --older-than 14 --time-unit days --timestring '\\%Y.\\%m.\\%d'"
     minute: 30
     hour: 1
+
+elasticsearch_curator_pip_package: 'python-pip'

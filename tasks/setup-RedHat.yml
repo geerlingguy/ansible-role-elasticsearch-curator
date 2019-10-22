@@ -1,3 +1,6 @@
 ---
 - name: Ensure pip is installed.
-  yum: name=python-pip state=present enablerepo=epel
+  yum:
+    name: '{{ elasticsearch_curator_pip_package }}'
+    state: present
+    enablerepo: epel
