@@ -14,6 +14,10 @@ On RedHat/CentOS, make sure you have the EPEL repository configured, so the `pyt
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    elasticsearch_curator_version: ''
+
+The version of `elasticsearch-curator` to install. Available versions are listed on the [Python Package Index](https://pypi.org/project/elasticsearch-curator/). By default, no version is specified, so the latest version will be installed.
+
     elasticsearch_curator_cron_jobs:
       - name: "Delete old elasticsearch indices."
         job: "/usr/local/bin/curator delete --older-than 30"

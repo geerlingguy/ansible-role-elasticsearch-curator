@@ -1,4 +1,5 @@
 ---
+elasticsearch_curator_version: ''
 elasticsearch_curator_cron_jobs:
   - name: "Delete old elasticsearch indices."
     job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'"
