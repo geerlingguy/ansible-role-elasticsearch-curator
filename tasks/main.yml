@@ -18,6 +18,7 @@
   cron:
     name: "{{ item.name }}"
     job: "{{ item.job }}"
+    state: "{{ item.state | default('present') }}"
     minute: "{{ item.minute | default('*') }}"
     hour: "{{ item.hour | default('*') }}"
     day: "{{ item.day | default('*') }}"
