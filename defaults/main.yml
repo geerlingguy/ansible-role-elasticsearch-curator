@@ -2,13 +2,54 @@
 elasticsearch_curator_version: ''
 
 elasticsearch_curator_cron_jobs:
-  - name: "Delete old elasticsearch indices."
-    job: "/usr/local/bin/curator delete indices --older-than 30 --time-unit days --timestring '\\%Y.\\%m.\\%d'"
+  - name: "Run elasticsearch curator actions."
+    job: "/usr/local/bin/curator ~/.curator/action.yml"
     minute: 0
     hour: 1
-  - name: "Close old elasticsearch indices."
-    job: "/usr/local/bin/curator close indices --older-than 14 --time-unit days --timestring '\\%Y.\\%m.\\%d'"
-    minute: 30
-    hour: 1
+
+elasticsearch_curator_config_directory: ~/.curator
+
+elasticsearch_curator_hosts:
+  - 'localhost:9200'
+elasticsearch_curator_http_auth: ''
+elasticsearch_curator_yaml: |
+  ---
+  client:
+    hosts: {{ elasticsearch_curator_hosts | to_yaml }}
+    url_prefix:
+    use_ssl: False
+    certificate:
+    client_cert:
+    client_key:
+    ssl_no_validate: False
+    http_auth: {{ elasticsearch_curator_http_auth }}
+    timeout: 30
+    master_only: False
+  logging:
+    loglevel: INFO
+    logfile:
+    logformat: default
+    blacklist: ['elasticsearch', 'urllib3']
+
+elasticsearch_curator_action_yaml: |
+  ---
+  actions:
+    1:
+      action: delete_indices
+      options:
+        ignore_empty_list: True
+        disable_action: False
+      filters:
+      - filtertype: pattern
+        kind: prefix
+        value: logstash-
+        exclude:
+      - filtertype: age
+        source: name
+        direction: older
+        timestring: '%Y.%m.%d'
+        unit: days
+        unit_count: 45
+        exclude:
 
 elasticsearch_curator_pip_package: 'python-pip'

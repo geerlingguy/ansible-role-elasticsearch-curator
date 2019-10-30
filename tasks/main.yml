@@ -14,6 +14,21 @@
   pip:
     name: argparse
 
+- name: Ensure configuration directory exists.
+  file:
+    path: '{{ elasticsearch_curator_config_directory }}'
+    state: directory
+
+- name: Write curator.yml and action.yml to configuration directory.
+  copy:
+    dest: '{{ elasticsearch_curator_config_directory }}/{{ item.file }}'
+    content: '{{ item.content }}'
+  with_items:
+    - file: curator.yml
+      content: '{{ elasticsearch_curator_yaml }}'
+    - file: action.yml
+      content: '{{ elasticsearch_curator_action_yaml }}'
+
 - name: Configure cron jobs for Elasticsearch Curator.
   cron:
     name: "{{ item.name }}"
