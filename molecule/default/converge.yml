@@ -1,0 +1,27 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Install cron (RedHat).
+      yum: name=cronie state=present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install cron (Debian).
+      apt: name=cron state=present
+      when: ansible_distribution == 'Debian'
+
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Set pip package for newer distros.
+      set_fact:
+        elasticsearch_curator_pip_package: python3-pip
+      when: >
+        (ansible_distribution == 'Debian' and ansible_distribution_major_version == '10') or
+        (ansible_os_family == 'RedHat' and ansible_distribution_major_version == '8')
+
+  roles:
+    - role: geerlingguy.elasticsearch-curator
