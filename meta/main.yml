@@ -2,6 +2,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: elasticsearch-curator
   author: geerlingguy
   description: Elasticsearch curator for Linux.
   company: "Midwestern Mac, LLC"
