@@ -2,7 +2,8 @@
 dependencies: []
 
 galaxy_info:
-  role_name: elasticsearch-curator
+  # See: https://github.com/ansible/galaxy/issues/2393
+  # role_name: elasticsearch-curator
   author: geerlingguy
   description: Elasticsearch curator for Linux.
   company: "Midwestern Mac, LLC"
