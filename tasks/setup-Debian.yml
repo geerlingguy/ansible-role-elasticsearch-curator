@@ -1,4 +1,12 @@
 ---
+- name: Ensure wheel is installed (Ubuntu 20.04).
+  apt:
+    name: python3-wheel
+    state: present
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_major_version == '20'
+
 - name: Ensure pip is installed.
   apt:
     name: '{{ elasticsearch_curator_pip_package }}'
