@@ -1,6 +1,6 @@
 # Ansible Role: Elasticsearch Curator
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-elasticsearch-curator.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-elasticsearch-curator)
+[![CI](https://github.com/geerlingguy/ansible-role-elasticsearch-curator/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-elasticsearch-curator/actions?query=workflow%3ACI)
 
 An Ansible Role that installs [Elasticsearch Curator](https://github.com/elasticsearch/curator) on RedHat/CentOS or Debian/Ubuntu.
 
