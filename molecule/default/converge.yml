@@ -4,6 +4,10 @@
   become: true
 
   pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
     - name: Install cron (RedHat).
       yum: name=cronie state=present
       when: ansible_os_family == 'RedHat'
@@ -11,10 +15,6 @@
     - name: Install cron (Debian).
       apt: name=cron state=present
       when: ansible_distribution == 'Debian'
-
-    - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
-      when: ansible_distribution == 'Ubuntu'
 
     - name: Set pip package for newer distros.
       set_fact:
