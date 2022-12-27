@@ -52,4 +52,5 @@ elasticsearch_curator_action_yaml: |
         unit_count: 45
         exclude:
 
-elasticsearch_curator_pip_package: 'python-pip'
+elasticsearch_curator_pip_package: 'python3-pip'
+elasticsearch_curator_pip_executable: "{{ 'pip3' if elasticsearch_curator_pip_package.startswith('python3') else 'pip' }}"

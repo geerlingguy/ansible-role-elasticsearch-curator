@@ -9,10 +9,12 @@
   pip:
     name: elasticsearch-curator
     version: "{{ elasticsearch_curator_version | default(omit) }}"
+    executable: "{{ pip_executable }}"
 
 - name: Install required dependency.
   pip:
     name: argparse
+    executable: "{{ pip_executable }}"
 
 - name: Ensure configuration directory exists.
   file:

@@ -80,9 +80,10 @@ This YAML goes into the file `~/.curator/curator.yml` and stores the connection 
 
 This YAML goes into the file `~/.curator/action.yml` and defines the actions Curator performs when the default cron job is run. See documentation: [Curator actions file](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/actionfile.html).
 
-    elasticsearch_curator_pip_package: 'python-pip'
+    elasticsearch_curator_pip_package: 'python3-pip'
+    elasticsearch_curator_pip_executable: "{{ 'pip3' if elasticsearch_curator_pip_package.startswith('python3') else 'pip' }}"
 
-System pip package which needs to be installed. For newer OSes or when using Python 3, you may need to override this and change it to `python3-pip`.
+System pip package which needs to be installed, and the `pip` executable to run. For older OSes or when using Python 2, you may need to override this and change these to `python-pip`, and `pip`, respectively.
 
 ## Dependencies
 
