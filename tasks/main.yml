@@ -10,6 +10,7 @@
     name: elasticsearch-curator
     version: "{{ elasticsearch_curator_version | default(omit) }}"
     executable: "{{ elasticsearch_curator_pip_executable }}"
+    extra_args: "{{ elasticsearch_curator_pip_extra_args | default(omit) }}"
 
 - name: Install required dependency.
   pip:
