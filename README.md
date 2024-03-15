@@ -6,7 +6,7 @@ An Ansible Role that installs [Elasticsearch Curator](https://github.com/elastic
 
 ## Requirements
 
-None, but it's a lot more helpful if you have Elasticsearch running somewhere :)
+None, but it's a lot more helpful if you have Elasticsearch running somewhere!
 
 On RedHat/CentOS, make sure you have the EPEL repository configured, so the `python-pip` package can be installed. You can install the EPEL repo by simply adding `geerlingguy.repo-epel` to your playbook's roles.
 
