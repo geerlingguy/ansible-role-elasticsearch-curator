@@ -17,7 +17,7 @@
 
     - name: Install cron (Debian).
       apt: name=cron state=present
-      when: ansible_distribution == 'Debian'
+      when: ansible_os_family == 'Debian'
 
   roles:
     - role: geerlingguy.repo-epel
