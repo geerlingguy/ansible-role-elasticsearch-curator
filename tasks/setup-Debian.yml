@@ -4,8 +4,8 @@
     name: python3-wheel
     state: present
   when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_major_version == '20'
+    - ansible_facts.distribution == 'Ubuntu'
+    - ansible_facts.distribution_major_version == '20'
 
 - name: Ensure pip is installed.
   apt:
